@@ -7,7 +7,6 @@ import UpiDemo from './pages/UpiDemo';
 import LearningHub from './pages/LearningHub';
 import Explore from './pages/Explore';
 import Graduation from './pages/Graduation';
-import AppLayout from './components/AppLayout';
 
 function App() {
   const [score, setScore] = useState(82);
@@ -32,22 +31,22 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<AppLayout><Login /></AppLayout>} />
+        <Route path="/login" element={<Login />} />
         <Route 
           path="/dashboard" 
-          element={<AppLayout><Dashboard score={score} milestones={milestones} /></AppLayout>} 
+          element={<Dashboard score={score} milestones={milestones} />} 
         />
         <Route 
           path="/upi-demo" 
-          element={<AppLayout><UpiDemo onComplete={() => completeMilestone('firstPayment', 0)} /></AppLayout>} 
+          element={<UpiDemo onComplete={() => completeMilestone('firstPayment', 0)} />} 
         />
         <Route 
           path="/ib-demo" 
-          element={<AppLayout><UpiDemo onComplete={() => completeMilestone('internetBanking', 18)} isIb={true} /></AppLayout>} 
+          element={<UpiDemo onComplete={() => completeMilestone('internetBanking', 18)} isIb={true} />} 
         />
-        <Route path="/learning" element={<AppLayout><LearningHub /></AppLayout>} />
-        <Route path="/explore" element={<AppLayout><Explore /></AppLayout>} />
-        <Route path="/graduation" element={<AppLayout><Graduation score={score} /></AppLayout>} />
+        <Route path="/learning" element={<LearningHub />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/graduation" element={<Graduation score={score} />} />
       </Routes>
     </Router>
   );

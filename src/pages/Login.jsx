@@ -1,29 +1,33 @@
 import { useNavigate } from 'react-router-dom';
-import { User } from 'lucide-react';
+import { User, ShieldCheck } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="page-container" style={{ display: 'flex', flexDirection: 'column', height: '100vh', justifyContent: 'center' }}>
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div style={{ width: '80px', height: '80px', backgroundColor: 'var(--primary-color)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
-          <User color="white" size={40} />
+    <div className="center-content page-container">
+      <div className="card" style={{ width: '100%', maxWidth: '400px', padding: '3rem 2rem', textAlign: 'center' }}>
+        <div style={{ width: '100px', height: '100px', backgroundColor: 'var(--primary-color)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
+          <User color="white" size={50} />
         </div>
-        <h1 style={{ fontSize: '2rem' }}>Hi Vidya!</h1>
-        <p className="text-muted">Welcome to SBI YONO</p>
-      </div>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Hi Vidya!</h1>
+        <p className="text-muted" style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>Welcome to SBI YONO</p>
 
-      <div className="card" style={{ borderLeft: '4px solid var(--accent-color)', marginBottom: '2rem' }}>
-        <h3 style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>Today's Goal</h3>
-        <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--primary-color)', marginTop: '0.25rem' }}>
-          Activate Internet Banking
-        </p>
-      </div>
+        <div style={{ backgroundColor: '#f1f5f9', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', borderLeft: '4px solid var(--accent-color)', textAlign: 'left' }}>
+          <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Today's Primary Goal</h3>
+          <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
+            Activate Internet Banking
+          </p>
+        </div>
 
-      <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
-        Continue Journey
-      </button>
+        <button className="btn btn-primary" onClick={() => navigate('/dashboard')} style={{ fontSize: '1.1rem', padding: '1rem' }}>
+          Continue Journey
+        </button>
+
+        <div style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+          <ShieldCheck size={16} /> Secure Login via AURA
+        </div>
+      </div>
     </div>
   );
 };

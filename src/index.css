@@ -29,42 +29,12 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #f1f5f9;
+  background-color: var(--bg-color);
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-}
-
-/* App Container for Demo pages */
-.app-container {
-  width: 100%;
-  min-height: 100vh;
-  background-color: var(--bg-color);
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* On larger screens, restrict the app container to look like a mobile phone */
-@media (min-width: 768px) {
-  .app-layout-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 0;
-    min-height: 100vh;
-  }
-
-  .app-container {
-    max-width: 414px;
-    height: 896px;
-    min-height: unset;
-    border-radius: 40px;
-    box-shadow: var(--shadow-lg);
-    border: 12px solid #1e293b;
-    overflow-y: auto;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -121,8 +91,16 @@ a {
 
 .page-container {
   padding: 1.5rem;
-  padding-bottom: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
   animation: fadeIn 0.3s ease-out;
+}
+
+/* Add padding for desktop views */
+@media (min-width: 768px) {
+  .page-container {
+    padding: 3rem;
+  }
 }
 
 @keyframes fadeIn {
@@ -145,7 +123,7 @@ a {
 .mt-3 { margin-top: 1rem; }
 .mt-4 { margin-top: 1.5rem; }
 
-/* Responsive Grid Utilities for Landing Page */
+/* Responsive Grid Utilities for Landing Page and Dashboard */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr;
@@ -168,4 +146,20 @@ a {
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  text-align: center;
+}
+
+/* Card Grid for Learning Hub / Explore */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
