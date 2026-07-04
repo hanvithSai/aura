@@ -9,6 +9,7 @@
   --text-secondary: #64748b;
   --border-radius: 20px;
   --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
   
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,20 +29,42 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  background-color: #f1f5f9; /* For desktop demo background */
+  background-color: #f1f5f9;
 }
 
-/* Prototype Container - Mobile sized */
 #root {
   width: 100%;
-  max-width: 414px; /* iPhone Max width */
+  min-height: 100vh;
+}
+
+/* App Container for Demo pages */
+.app-container {
+  width: 100%;
   min-height: 100vh;
   background-color: var(--bg-color);
   position: relative;
   overflow-x: hidden;
-  box-shadow: 0 0 40px rgba(0,0,0,0.1);
+}
+
+/* On larger screens, restrict the app container to look like a mobile phone */
+@media (min-width: 768px) {
+  .app-layout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    min-height: 100vh;
+  }
+
+  .app-container {
+    max-width: 414px;
+    height: 896px;
+    min-height: unset;
+    border-radius: 40px;
+    box-shadow: var(--shadow-lg);
+    border: 12px solid #1e293b;
+    overflow-y: auto;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -121,3 +144,28 @@ a {
 .mb-4 { margin-bottom: 1.5rem; }
 .mt-3 { margin-top: 1rem; }
 .mt-4 { margin-top: 1.5rem; }
+
+/* Responsive Grid Utilities for Landing Page */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.landing-section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
