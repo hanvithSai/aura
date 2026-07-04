@@ -19,13 +19,39 @@ const Dashboard = ({ score, milestones }) => {
   const completedCount = Object.values(milestones).filter(Boolean).length;
   const pendingCount = journeySteps.length - completedCount;
 
-  let currentStage = "Explorer";
+  let currentStage = "Getting Started";
   if (score >= 100) currentStage = "Digital Banking Champion";
   else if (score >= 80) currentStage = "Confident";
   else if (score >= 60) currentStage = "Digital Explorer";
   else if (score >= 40) currentStage = "Explorer";
   else if (score >= 20) currentStage = "Learning";
-  else currentStage = "Getting Started";
+
+  // Dynamic Content based on next milestone
+  let coachMessage = "";
+  let targetRoute = "";
+  let buttonText = "";
+  let recTitle = "";
+  let recWhy = "";
+
+  if (!milestones.upi) {
+    coachMessage = "Hello Vidya.\n\nI noticed you haven't activated UPI yet.\n\nLet's do a quick ₹1 demo to securely set up your MPIN and activate UPI.";
+    targetRoute = "/upi-demo";
+    buttonText = "Set up UPI";
+    recTitle = "Activate UPI";
+    recWhy = "Send and receive money instantly, 24/7 directly from your bank account without sharing your details.";
+  } else if (!milestones.internetBanking) {
+    coachMessage = "Great job activating UPI!\n\nNow let's enable Internet Banking to unlock full access to your account.";
+    targetRoute = "/ib-demo";
+    buttonText = "Enable Internet Banking";
+    recTitle = "Enable Internet Banking";
+    recWhy = "Access your bank statements, execute fund transfers, and unlock exclusive banking services from anywhere.";
+  } else {
+    coachMessage = "Awesome progress!\n\nNow let's set up AutoPay and create a small savings goal.";
+    targetRoute = "/explore";
+    buttonText = "Explore Products";
+    recTitle = "Set up Savings Goal";
+    recWhy = "Build your emergency fund automatically. Even small recurring amounts can make a huge difference.";
+  }
 
   return (
     <div className="page-container">
@@ -47,9 +73,9 @@ const Dashboard = ({ score, milestones }) => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {score < 100 ? (
             <AiCoachCard 
-              message={"Hello Vidya.\n\nYou're only one step away from becoming fully digital.\n\nToday's goal: Activate Internet Banking."}
-              targetRoute="/ib-demo"
-              buttonText="Continue Setup"
+              message={coachMessage}
+              targetRoute={targetRoute}
+              buttonText={buttonText}
             />
           ) : (
             <AiCoachCard 
@@ -91,13 +117,13 @@ const Dashboard = ({ score, milestones }) => {
                 <h3 style={{ margin: 0, fontSize: '1.25rem' }}>AURA Recommendation</h3>
               </div>
               <div style={{ marginTop: '1.5rem' }}>
-                <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>Enable Internet Banking</div>
+                <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>{recTitle}</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '8px', marginBottom: '16px' }}>
                   <Clock size={16} /> Estimated Time: 3 minutes
                 </div>
                 <div style={{ fontSize: '1rem', paddingLeft: '16px', borderLeft: '3px solid #e2e8f0', color: 'var(--text-secondary)' }}>
                   <strong style={{ display: 'block', marginBottom: '6px', color: 'var(--text-primary)' }}>Why is this important?</strong>
-                  Access your bank statements, execute fund transfers, and unlock exclusive banking services from anywhere.
+                  {recWhy}
                 </div>
               </div>
             </div>

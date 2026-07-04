@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Smartphone, CheckCircle, Shield, ChevronLeft, ArrowRight } from 'lucide-react';
+import { Smartphone, CheckCircle, ChevronLeft, ArrowRight } from 'lucide-react';
 import AiCoachCard from '../components/AiCoachCard';
 
 const UpiDemo = ({ onComplete, isIb = false }) => {
@@ -10,7 +10,7 @@ const UpiDemo = ({ onComplete, isIb = false }) => {
   const title = isIb ? "Internet Banking Setup" : "UPI Payment Demo";
   const steps = isIb 
     ? ["Enter Account Details", "Verify OTP", "Set Username & Password", "Setup Complete"]
-    : ["Choose Contact", "Enter ₹1", "Enter MPIN", "Payment Success"];
+    : ["Choose Contact", "Enter ₹1 for Demo", "Enter Secure MPIN", "Payment Success"];
 
   const handleNext = () => {
     if (step < steps.length - 1) {
@@ -49,7 +49,7 @@ const UpiDemo = ({ onComplete, isIb = false }) => {
               <CheckCircle size={80} color="var(--accent-color)" style={{ margin: '0 auto 2rem' }} />
               <h3 style={{ fontSize: '2rem', color: 'var(--accent-color)', marginBottom: '1rem' }}>Congratulations!</h3>
               <p style={{ color: '#065f46', fontSize: '1.25rem', marginBottom: '3rem' }}>
-                You completed your {isIb ? 'Internet Banking Setup' : 'first UPI payment'}.
+                You completed your {isIb ? 'Internet Banking Setup' : 'first secure ₹1 demo transaction'}.
               </p>
               <button className="btn btn-primary" onClick={handleNext} style={{ fontSize: '1.1rem', padding: '1rem' }}>
                 Return to Dashboard
@@ -81,10 +81,10 @@ const UpiDemo = ({ onComplete, isIb = false }) => {
           </div>
 
           <AiCoachCard 
-            title="AURA Security Tip"
+            title={isIb ? "AURA Security Tip" : "AURA Explains: MPIN"}
             message={isIb 
               ? "Never share your password or OTP. Always check for the lock icon in your browser when using Internet Banking." 
-              : "Your MPIN acts like your ATM PIN. Never share it with anyone. AURA will never ask for your MPIN."}
+              : "An MPIN (Mobile Personal Identification Number) is a 6-digit passcode used to authenticate your transactions. It acts like your ATM PIN but for your phone. Never share it with anyone. AURA will never ask for your MPIN."}
           />
         </div>
       </div>

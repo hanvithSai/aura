@@ -9,12 +9,12 @@ import Explore from './pages/Explore';
 import Graduation from './pages/Graduation';
 
 function App() {
-  const [score, setScore] = useState(82);
+  const [score, setScore] = useState(30);
   const [milestones, setMilestones] = useState({
     account: true,
     kyc: true,
-    upi: true,
-    firstPayment: true,
+    upi: false,
+    firstPayment: false,
     internetBanking: false,
     billPay: false,
     savingsGoal: false,
@@ -31,18 +31,21 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login milestones={milestones} />} />
         <Route 
           path="/dashboard" 
           element={<Dashboard score={score} milestones={milestones} />} 
         />
         <Route 
           path="/upi-demo" 
-          element={<UpiDemo onComplete={() => completeMilestone('firstPayment', 0)} />} 
+          element={<UpiDemo onComplete={() => {
+            completeMilestone('upi', 20);
+            completeMilestone('firstPayment', 15);
+          }} />} 
         />
         <Route 
           path="/ib-demo" 
-          element={<UpiDemo onComplete={() => completeMilestone('internetBanking', 18)} isIb={true} />} 
+          element={<UpiDemo onComplete={() => completeMilestone('internetBanking', 15)} isIb={true} />} 
         />
         <Route path="/learning" element={<LearningHub />} />
         <Route path="/explore" element={<Explore />} />

@@ -1,8 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { User, ShieldCheck } from 'lucide-react';
 
-const Login = () => {
+const Login = ({ milestones = {} }) => {
   const navigate = useNavigate();
+
+  let primaryGoal = "Activate UPI";
+  if (milestones.upi && !milestones.internetBanking) {
+    primaryGoal = "Activate Internet Banking";
+  } else if (milestones.internetBanking && !milestones.savingsGoal) {
+    primaryGoal = "Set Up Savings Goal";
+  }
 
   return (
     <div className="center-content page-container">
@@ -16,7 +23,7 @@ const Login = () => {
         <div style={{ backgroundColor: '#f1f5f9', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', borderLeft: '4px solid var(--accent-color)', textAlign: 'left' }}>
           <h3 style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Today's Primary Goal</h3>
           <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
-            Activate Internet Banking
+            {primaryGoal}
           </p>
         </div>
 
